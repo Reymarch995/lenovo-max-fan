@@ -1,0 +1,19 @@
+[Unit]
+Description=Lenovo IdeaPad sustained maximum fan controller
+ConditionACPower=true
+ConditionPathExists=/sys/devices/pci0000:00/0000:00:14.3/PNP0C09:00/VPC2004:00/fan_mode
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/lenovo-max-fan
+ExecStopPost=/usr/local/sbin/lenovo-max-fan --reset
+Restart=no
+TimeoutStopSec=3s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/sys/devices/pci0000:00/0000:00:14.3/PNP0C09:00/VPC2004:00/fan_mode
+
+[Install]
+WantedBy=multi-user.target
